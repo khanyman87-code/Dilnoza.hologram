@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday, Dilnoza!</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#050f26;--bg2:#0b2a5b;--sky:#7fd0f5;--glow:#2ee6ff;--warm:#ff9f43;--ink:#eaf6ff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:Sora,system-ui,sans-serif;background:radial-gradient(1200px 700px at 50% 30%,var(--bg2),var(--bg1) 70%) fixed,var(--bg1);overflow-x:hidden}
+section{min-height:100vh;padding:56px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+h1,h2{margin:0;text-transform:uppercase;color:var(--sky);font-weight:600;line-height:1.1;letter-spacing:.01em}
+h1{font-size:clamp(1.7rem,6vw,3.6rem)}
+h2{font-size:clamp(1.5rem,5vw,2.8rem)}
+.sub{margin:14px 0 0;font-size:clamp(1.1rem,3.6vw,2rem);text-transform:uppercase;color:#fff;font-weight:400}
+.stage{perspective:1400px;width:100%;max-width:1100px;margin-top:38px}
+.row{display:flex;gap:0;justify-content:center;align-items:stretch;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .15s linear}
+.panel{position:relative;flex:1 1 0;min-height:290px;padding:16px;text-align:left;border:1px solid rgba(46,230,255,.55);border-radius:14px;background:linear-gradient(160deg,rgba(30,90,150,.35),rgba(6,22,51,.65));backdrop-filter:blur(6px);box-shadow:0 0 26px rgba(46,230,255,.25),inset 0 0 30px rgba(46,230,255,.08);overflow:hidden}
+.panel h3{margin:0 0 10px;font-size:.78rem;font-weight:600;color:var(--glow);text-transform:uppercase;letter-spacing:.08em}
+.panel:after{content:"";position:absolute;left:0;right:0;height:60px;top:-60px;background:linear-gradient(transparent,rgba(46,230,255,.16),transparent);animation:scan 5s linear infinite}
+@keyframes scan{to{top:110%}}
+.l{transform:translateZ(-30px) rotateY(34deg);transform-origin:right center}
+.r{transform:translateZ(-30px) rotateY(-34deg);transform-origin:left center}
+.c{transform:translateZ(40px);flex:1.5 1 0;z-index:2}
+.dots{display:grid;grid-template-columns:repeat(14,1fr);gap:6px;margin-bottom:14px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--sky);opacity:.15}
+.bar{margin:10px 0;font-size:.72rem;color:var(--sky)}
+.bar b{display:block;height:7px;margin-top:5px;border-radius:9px;background:rgba(127,208,245,.18);overflow:hidden}
+.bar b:after{content:"";display:block;height:100%;width:0;background:linear-gradient(90deg,var(--glow),var(--warm));border-radius:9px;transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.in .bar b:after{width:var(--v)}
+canvas.nn{width:100%;height:230px;display:block}
+.gauge{width:120px;height:120px;margin:6px auto 12px;border-radius:50%;background:conic-gradient(var(--glow) 0 100%,rgba(127,208,245,.15) 0);display:grid;place-items:center}
+.gauge span{width:92px;height:92px;border-radius:50%;background:#071a3d;display:grid;place-items:center;font-weight:700;font-size:1.4rem}
+.tree{width:min(100%,760px);margin-top:28px}
+.tree rect{fill:rgba(30,90,150,.35);stroke:var(--glow);stroke-width:1.2}
+.tree text{fill:var(--ink);font:600 13px Sora,sans-serif;text-anchor:middle;text-transform:uppercase}
+.tree line{stroke:var(--sky);stroke-width:1.4;opacity:.7}
+.metrics{width:min(100%,640px);margin-top:26px;padding:22px}
+.metrics .bar{font-size:.95rem;text-align:left}
+.metrics .bar b{height:10px}
+.end h2{font-size:clamp(2.2rem,10vw,6rem);background:linear-gradient(90deg,var(--sky),#fff,var(--warm));-webkit-background-clip:text;background-clip:text;color:transparent}
+.end p{max-width:34ch;font-size:1.15rem;margin:16px auto 28px}
+button{font:600 1rem Sora,system-ui,sans-serif;color:#04122b;background:var(--glow);border:0;border-radius:999px;padding:14px 30px;cursor:pointer;box-shadow:0 0 24px rgba(46,230,255,.55)}
+button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9}
+@media (max-width:720px){.row{flex-direction:column;gap:14px;transform:none!important}.l,.r,.c{transform:none;flex:none}}
+@media (prefers-reduced-motion:reduce){.panel:after{animation:none}.bar b:after{transition:none}}
+</style></head>
+<body>
+<section id="top">
+  <h1>Celebrating<br>Dilnoza's birthday</h1>
+  <p class="sub">Happy Birthday, Dilnoza</p>
+  <div class="stage"><div class="row" id="row">
+    <div class="panel l"><h3>Global wish map</h3><div class="dots" id="dots"></div>
+      <div class="bar">Wishes arriving<b style="--v:92%"></b></div><div class="bar">Smiles sent<b style="--v:100%"></b></div></div>
+    <div class="panel c"><h3>Wish neural network</h3><canvas class="nn" id="nn"></canvas></div>
+    <div class="panel r"><h3>Real time joy metrics</h3><div class="gauge"><span>100%</span></div>
+      <div class="bar">Happiness<b style="--v:100%"></b></div><div class="bar">Cake ready<b style="--v:100%"></b></div></div>
+  </div></div>
+</section>
+
+<section id="path">
+  <h2>Birthday pathfinder</h2>
+  <svg class="tree" viewBox="0 0 620 300" role="img" aria-label="Birthday path: from Dilnoza's birthday to make a wish, open gifts, then blow the candles, cut the cake and share the joy">
+    <line x1="310" y1="52" x2="170" y2="118"/><line x1="310" y1="52" x2="450" y2="118"/>
+    <line x1="170" y1="158" x2="90" y2="232"/><line x1="170" y1="158" x2="250" y2="232"/><line x1="450" y1="158" x2="450" y2="232"/>
+    <rect x="200" y="20" width="220" height="40" rx="8"/><text x="310" y="45">Dilnoza's birthday</text>
+    <rect x="90" y="118" width="160" height="40" rx="8"/><text x="170" y="143">Make a wish</text>
+    <rect x="370" y="118" width="160" height="40" rx="8"/><text x="450" y="143">Open the gifts</text>
+    <rect x="10" y="232" width="160" height="40" rx="8"/><text x="90" y="257">Blow candles</text>
+    <rect x="170" y="232" width="160" height="40" rx="8"/><text x="250" y="257">Cut the cake</text>
+    <rect x="370" y="232" width="160" height="40" rx="8"/><text x="450" y="257">Share the joy</text>
+  </svg>
+</section>
+
+<section id="metrics">
+  <h2>Real time joy metrics</h2>
+  <div class="panel metrics" id="mt">
+    <div class="bar">Happiness<b style="--v:100%"></b></div><div class="bar">Laughter<b style="--v:98%"></b></div>
+    <div class="bar">Cake<b style="--v:100%"></b></div><div class="bar">Gifts<b style="--v:95%"></b></div><div class="bar">Love<b style="--v:100%"></b></div>
+  </div>
+</section>
+
+<section class="end" id="end">
+  <h2>Happy<br>Birthday<br>Dilnoza!</h2>
+  <p>May every wish you make come true this year.</p>
+  <button id="go">Celebrate</button>
+</section>
+<canvas id="fx" aria-hidden="true"></canvas>
+<script>
+const $=id=>document.getElementById(id),rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+// dots
+const d=$('dots');for(let i=0;i<84;i++){const e=document.createElement('i');e.style.opacity=Math.random()<.3?.9:.15+Math.random()*.2;d.appendChild(e)}
+// tilt
+const row=$('row');
+addEventListener('pointermove',e=>{row.style.setProperty('--ry',((e.clientX/innerWidth-.5)*12)+'deg');row.style.setProperty('--rx',((.5-e.clientY/innerHeight)*6)+'deg')});
+// neural net
+const nn=$('nn'),x=nn.getContext('2d'),L=[3,5,5,3];let nodes=[],edges=[],W,H;
+function layout(){const r=devicePixelRatio||1;W=nn.clientWidth;H=nn.clientHeight;nn.width=W*r;nn.height=H*r;x.setTransform(r,0,0,r,0,0);nodes=[];edges=[];
+  L.forEach((n,i)=>{for(let j=0;j<n;j++)nodes.push({l:i,x:W*(.1+.8*i/(L.length-1)),y:H*(.15+.7*(n===1?.5:j/(n-1))),o:(i+j)%4===0})});
+  nodes.forEach((a,i)=>nodes.forEach((b,k)=>{if(b.l===a.l+1)edges.push([i,k,Math.random()])}))}
+addEventListener('resize',layout);layout();
+(function draw(t){x.clearRect(0,0,W,H);x.lineWidth=1;
+  edges.forEach(([i,k,p])=>{const a=nodes[i],b=nodes[k];x.strokeStyle=(i+k)%3?'rgba(127,208,245,.35)':'rgba(255,159,67,.45)';x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();
+    const f=rm?.5:((t/2500+p)%1);x.fillStyle='#fff';x.beginPath();x.arc(a.x+(b.x-a.x)*f,a.y+(b.y-a.y)*f,1.8,0,7);x.fill()});
+  nodes.forEach(n=>{x.fillStyle=n.o?'#ff9f43':'#2ee6ff';x.shadowColor=x.fillStyle;x.shadowBlur=12;x.beginPath();x.arc(n.x,n.y,6,0,7);x.fill();x.shadowBlur=0});
+  requestAnimationFrame(draw)})(0);
+// bars reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.3});
+document.querySelectorAll('.panel').forEach(p=>io.observe(p));
+setTimeout(()=>document.querySelectorAll('#top .panel').forEach(p=>p.classList.add('in')),300);
+// celebrate
+const fx=$('fx'),f=fx.getContext('2d');let ps=[];
+function fit(){fx.width=innerWidth;fx.height=innerHeight}addEventListener('resize',fit);fit();
+$('go').onclick=e=>{const r=e.target.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+  for(let i=0;i<140;i++){const a=Math.random()*6.28,s=3+Math.random()*7;ps.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s-4,c:['#2ee6ff','#ff9f43','#ffffff','#7fd0f5'][i%4],l:1})}};
+(function step(){f.clearRect(0,0,fx.width,fx.height);ps=ps.filter(p=>p.l>0);
+  ps.forEach(p=>{p.vy+=.18;p.x+=p.vx;p.y+=p.vy;p.l-=.011;f.globalAlpha=Math.max(p.l,0);f.fillStyle=p.c;f.shadowColor=p.c;f.shadowBlur=10;f.beginPath();f.arc(p.x,p.y,3.2,0,7);f.fill()});
+  f.globalAlpha=1;requestAnimationFrame(step)})();
+</script></body></html>
